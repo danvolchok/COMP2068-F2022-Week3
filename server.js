@@ -11,8 +11,32 @@ let hello = (req, res) => {
     res.end()
 }
 
+let goodbye = (req, res) => {
+    res.writeHead(200)
+    res.write('Goodbye world')
+    res.end()
+}
+
+let index = (req, res) => {
+    if(req.url === '/') {
+        res.writeHead(200)
+        res.write('Home Page')
+        res.end()
+    }
+    else {
+        res.writeHead(404)
+        res.write('Not Found')
+        res.end()
+    }
+        
+}
+
 // route http requests to our handler function
-app.use(hello)
+// index path must go last
+app.use('/hello', hello)
+app.use('/goodbye', goodbye)
+app.use('', index)
+
 
 
 // start express web server
